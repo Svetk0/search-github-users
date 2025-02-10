@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
-//import { Button } from '@/components';
+import { IRepo } from '@/types/repo';
 import styles from './RepoSearch.module.scss';
+import { RepoCard } from '../RepoCard/RepoCard';
 
 export function RepoSearch() {
   const [username, setUsername] = useState('');
   const [page, setPage] = useState(1);
-  const [allRepos, setAllRepos] = useState<object[]>([]);
+  const [allRepos, setAllRepos] = useState<IRepo[]>([]);
   const loader = useRef(null);
 
   const {
@@ -70,24 +71,7 @@ export function RepoSearch() {
       {renderError()}
 
       <div className={styles.repoGrid}>
-        {allRepos?.map((repo) => (
-          <div key={repo.id} className={styles.repoCard}>
-            <h3>{repo.name}</h3>
-            <p>{repo.description || 'No description available'}</p>
-            <div className={styles.repoInfo}>
-              <span>⭐ {repo.stargazers_count}</span>
-              <span>Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
-            </div>
-            <a
-              href={repo.html_url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={styles.repoLink}
-            >
-              View Repository
-            </a>
-          </div>
-        ))}
+        {allRepos?.map((repo) => <RepoCard repo={repo} key={repo.id} />)}
       </div>
 
       {isFetching && <div className={styles.loading}>Loading more...</div>}

@@ -1,5 +1,5 @@
 'use client';
-import { RepoSearch } from '@/components/RepoSearch/RepoSearch';
+import { RepoSearch } from '@/components';
 //import styles from './page.module.scss';
 
 export default function Home() {
