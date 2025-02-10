@@ -3,67 +3,29 @@
 .container {
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .input {
     @include Input;
+    width: clamp(250px, 100%, 400px);
+    margin-bottom: 40px;
 }
 
 .repoGrid {
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
-.repoCard {
-    background: $black-70;
-    border-radius: 8px;
-    padding: 20px;
-    border: 1px solid $purple;
-    transition: all 0.3s ease;
 
-    &:hover {
-        transform: translateY(-5px);
-        box-shadow: $shadow-box-perimeter;
-        border: 1px solid $light-green-neon;
-    }
-
-    h3 {
-        margin: 0 0 10px;
-        color: $white;
-    }
-
-    p {
-        color: $grey;
-        margin-bottom: 15px;
-        font-size: 14px;
-    }
-}
-
-.repoInfo {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: $purple-light;
-    font-size: 14px;
-}
-
-.repoLink {
-    display: inline-block;
-    padding: 8px 16px;
-    background: $purple;
-    color: $white;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-
-    &:hover {
-        background: $purple-light;
-    }
-}
 
 .loading {
     text-align: center;

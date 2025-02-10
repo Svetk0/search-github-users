@@ -1,86 +1,23 @@
 {
+  "card": {
+    "updated": "Updated",
+    "buttons": {
+      "view": "View Repository"
+    },
+    "no_data": "No description available"
+  },
+  "search": {
+    "placeholder": "Enter GitHub username..."
+  },
   "home": {
-    "title": "Challenge App",
-    "buttons": {
-      "logIn": "Log in",
-      "signUp": "Sign Up"
-    }
-  },
-  "challendes": {
-    "title": "Daily Routine",
-    "buttons": {
-      "add": "Add new",
-      "back": "Back"
-    }
-  },
-  "challenge_form": {
-    "title_create": "Create a new Challenge",
-    "title_edit": "Edit Challenge",
-    "email": {
-      "label": "Email",
-      "placeholder": "example@example.ex",
-      "error_message": "Incorrect email format",
-      "require_message": "Please, fill it",
-      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+    "title": "GitHub Repository Search",
+    "loader": {
+      "loading": "Loading...",
+      "fetching": "Loading more..."
     },
-    "name": {
-      "label": "Your Goal",
-      "placeholder": "Describe your challenge",
-      "error_message": "The description should contain 2..50 symbols",
-      "require_message": "Please, fill it"
-    },
-    "goal": {
-      "label": "Amount",
-      "placeholder": "number",
-      "error_message": "Should be above 0",
-      "require_message": "Please, fill it"
-    },
-    "period": {
-      "label": "per Period",
-      "placeholder": "week",
-      "time": [
-        {
-          "value": "day"
-        },
-        {
-          "value": "week"
-        },
-        {
-          "value": "month"
-        }
-      ],
-      "error_message": "Choose one",
-      "require_message": "Please, fill it"
-    },
-    "date_start": {
-      "label": "Start",
-      "placeholder": "17.12.2024",
-      "error_message": "Can't be early 2000",
-      "require_message": "Please, fill it"
-    },
-    "date_finish": {
-      "label": "Finish",
-      "placeholder": "20.12.2024",
-      "error_message": "Can't be early than Start",
-      "require_message": "Please, fill it"
-    },
-    "progress": {
-      "label": "Progress",
-      "placeholder": "current result",
-      "error_message": "",
-      "require_message": "Please, fill it"
-    },
-    "switcher": {
-      "label": "All time",
-      "label_complete": "Complete this challenge"
-    },
-
-    "buttons": {
-      "back": "Back",
-      "create": "Create",
-      "create_load": "Creating...",
-      "edit": "Edit",
-      "edit_load": "Editing..."
+    "errors": {
+      "user": "User not found",
+      "fetching": "Error fetching repositories"
     }
   }
 }

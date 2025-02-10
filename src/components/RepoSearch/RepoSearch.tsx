@@ -1,13 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
-import { Button } from '@/components';
+import { RepoCard } from '../RepoCard/RepoCard';
+import { IRepo } from '@/types/repo';
 import styles from './RepoSearch.module.scss';
 
 export function RepoSearch() {
   const [username, setUsername] = useState('');
   const [page, setPage] = useState(1);
-  const [allRepos, setAllRepos] = useState<any[]>([]);
+  const [allRepos, setAllRepos] = useState<IRepo[]>([]);
   const loader = useRef(null);
 
   const {
@@ -16,11 +17,13 @@ export function RepoSearch() {
     error,
     isFetching,
   } = useGetUserReposQuery({ username, page }, { skip: !username });
+  const res = useGetUserReposQuery({ username, page }, { skip: !username });
 
   useEffect(() => {
     if (repos) {
       setAllRepos((prev) => (page === 1 ? repos : [...prev, ...repos]));
     }
+    console.log('res', res);
   }, [repos]);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
@@ -63,33 +66,16 @@ export function RepoSearch() {
         placeholder='Enter GitHub username'
         onChange={(e) => debouncedSearch(e.target.value)}
       />
-      <Button type='submit' text={'Find User'} color='default' />
+
       {isLoading && <div className={styles.loading}>Loading...</div>}
       {renderError()}
 
       <div className={styles.repoGrid}>
-        {allRepos?.map((repo) => (
-          <div key={repo.id} className={styles.repoCard}>
-            <h3>{repo.name}</h3>
-            <p>{repo.description || 'No description available'}</p>
-            <div className={styles.repoInfo}>
-              <span>⭐ {repo.stargazers_count}</span>
-              <span>Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
-            </div>
-            <a
-              href={repo.html_url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={styles.repoLink}
-            >
-              View Repository
-            </a>
-          </div>
-        ))}
+        {allRepos?.map((repo) => <RepoCard repo={repo} key={repo.id} />)}
       </div>
 
       {isFetching && <div className={styles.loading}>Loading more...</div>}
-      <div ref={loader} style={{ height: '20px' }} />
+      <div ref={loader} style={{ height: '200px' }} />
     </div>
   );
 }
