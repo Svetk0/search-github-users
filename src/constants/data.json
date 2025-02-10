@@ -3,7 +3,8 @@
     "updated": "Updated",
     "buttons": {
       "view": "View Repository"
-    }
+    },
+    "no_data": "No description available"
   },
   "search": {
     "placeholder": "Enter GitHub username..."
