@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
+import { RepoCard } from '../RepoCard/RepoCard';
 import { IRepo } from '@/types/repo';
 import styles from './RepoSearch.module.scss';
-import { RepoCard } from '../RepoCard/RepoCard';
 
 export function RepoSearch() {
   const [username, setUsername] = useState('');
@@ -75,7 +75,7 @@ export function RepoSearch() {
       </div>
 
       {isFetching && <div className={styles.loading}>Loading more...</div>}
-      <div ref={loader} style={{ height: '20px' }} />
+      <div ref={loader} style={{ height: '200px' }} />
     </div>
   );
 }

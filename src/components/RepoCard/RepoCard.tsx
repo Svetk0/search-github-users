@@ -1,6 +1,6 @@
-'use client';
 import Link from 'next/link';
 import { IRepo } from '@/types/repo';
+import staticData from '@/constants/data.json';
 import styles from './RepoCard.module.scss';
 
 type Props = {
@@ -8,13 +8,19 @@ type Props = {
 };
 
 export function RepoCard({ repo }: Props) {
+  const {
+    updated,
+    buttons: { view },
+  } = staticData.card;
   return (
     <div className={styles.repoCard}>
       <h3>{repo.name}</h3>
       <p>{repo.description || 'No description available'}</p>
       <div className={styles.repoInfo}>
         <span>⭐ {repo.stargazers_count}</span>
-        <span>Updated: {new Date(repo.updated_at).toLocaleDateString()}</span>
+        <span>
+          {updated} {new Date(repo.updated_at).toLocaleDateString()}
+        </span>
       </div>
 
       <Link
@@ -23,7 +29,7 @@ export function RepoCard({ repo }: Props) {
         rel='noopener noreferrer'
         className={styles.repoLink}
       >
-        View Repository
+        {view}
       </Link>
     </div>
   );
