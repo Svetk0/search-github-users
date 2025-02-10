@@ -1,13 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
-import { Button } from '@/components';
+//import { Button } from '@/components';
 import styles from './RepoSearch.module.scss';
 
 export function RepoSearch() {
   const [username, setUsername] = useState('');
   const [page, setPage] = useState(1);
-  const [allRepos, setAllRepos] = useState<any[]>([]);
+  const [allRepos, setAllRepos] = useState<object[]>([]);
   const loader = useRef(null);
 
   const {
@@ -16,11 +16,13 @@ export function RepoSearch() {
     error,
     isFetching,
   } = useGetUserReposQuery({ username, page }, { skip: !username });
+  const res = useGetUserReposQuery({ username, page }, { skip: !username });
 
   useEffect(() => {
     if (repos) {
       setAllRepos((prev) => (page === 1 ? repos : [...prev, ...repos]));
     }
+    console.log('res', res);
   }, [repos]);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
@@ -63,7 +65,7 @@ export function RepoSearch() {
         placeholder='Enter GitHub username'
         onChange={(e) => debouncedSearch(e.target.value)}
       />
-      <Button type='submit' text={'Find User'} color='default' />
+
       {isLoading && <div className={styles.loading}>Loading...</div>}
       {renderError()}
 
