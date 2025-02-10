@@ -4,5 +4,19 @@
     "buttons": {
       "view": "View Repository"
     }
+  },
+  "search": {
+    "placeholder": "Enter GitHub username..."
+  },
+  "home": {
+    "title": "GitHub Repository Search",
+    "loader": {
+      "loading": "Loading...",
+      "fetching": "Loading more..."
+    },
+    "errors": {
+      "user": "User not found",
+      "fetching": "Error fetching repositories"
+    }
   }
 }
