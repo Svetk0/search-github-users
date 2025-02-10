@@ -1,0 +1,53 @@
+@import './index.scss';
+
+:root {
+  --background: black;
+  --font-color: rgba(246, 255, 251, 1);
+  --font-color-alt: rgba(19, 29, 25, 1);
+  --bgOpacity: #ffffff09;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  max-width: 100vw;
+  background-image: url('../../public/background.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--background);
+  margin: 0 auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  height: 100vh;
+  margin: 0 auto;
+  color: var(--font-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5vh 5px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  @include ResetButton;
+  color: var(--font-color-alt);
+}
