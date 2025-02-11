@@ -16,7 +16,7 @@ export const githubApi = createApi({
       query: ({ username, page = 1 }) => ({
         url: `/users/${username}/repos`,
         params: {
-          per_page: 20,
+          per_page: 10,
           page,
           sort: 'updated',
         },
