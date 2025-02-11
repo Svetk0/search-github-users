@@ -5,12 +5,14 @@ interface ReposState {
   repos: IRepository[] | null;
   loading: boolean;
   error: string | null;
+  page: number;
 }
 
 const initialState: ReposState = {
   repos: null,
   loading: false,
   error: null,
+  page: 1,
 };
 
 const reposSlice = createSlice({
@@ -27,8 +29,11 @@ const reposSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
+    },
   },
 });
 
-export const { setRepos, setLoading, setError } = reposSlice.actions;
+export const { setRepos, setLoading, setError, setPage } = reposSlice.actions;
 export default reposSlice.reducer;
