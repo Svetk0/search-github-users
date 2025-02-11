@@ -1,54 +1,57 @@
-// import Link from 'next/link';
-// import { IRepository } from '@/types/repo';
-// import { useState, useEffect, useRef } from 'react';
-// import { useDebouncedCallback } from 'use-debounce';
-// import { useGetUserReposQuery } from '@/api/github';
-// import staticData from '@/constants/data.json';
-// import styles from './Search.module.scss';
+import { useState, useEffect } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
+import { useGetUserReposQuery } from '@/api/github';
+import { useAppDispatch } from '@/lib/hooks';
+import { setRepos, setLoading, setError } from '@/store/reposSlice';
+import staticData from '@/constants/data.json';
+import styles from './Search.module.scss';
 
-// export async function Search() {
-//   const [username, setUsername] = useState('');
-//   const [page, setPage] = useState(1);
-//   const [allRepos, setAllRepos] = useState<IRepository[] | null>(null);
-//   const loader = useRef(null);
+export function Search() {
+  const {
+    placeholder,
+    errors: { user, fetching, no_avalaible },
+  } = staticData.fetch;
+  const [username, setUsername] = useState('');
+  const [page, setPage] = useState(1);
+  const dispatch = useAppDispatch();
 
-//   const {
-//     data: repos,
-//     isLoading,
-//     error,
-//     isFetching,
-//   } = await useGetUserReposQuery({ username, page }, { skip: !username });
-//   const debouncedSearch = useDebouncedCallback((value: string) => {
-//     setUsername(value);
-//     setPage(1);
-//     setAllRepos([]);
-//   }, 1000);
-//   const renderError = () => {
-//     if (error) {
-//       if ('status' in error) {
-//         return <div className={styles.error}>User not found</div>;
-//       }
-//       return <div className={styles.error}>Error fetching repositories</div>;
-//     }
-//     return null;
-//   };
-//   const renderNodata = () => {
-//     if (repos?.length === 0 && page === 1) {
-//       return <div className={styles.error}>No public repositories avalaible</div>;
-//     }
-//     return null;
-//   };
-//   return (
-//     <>
-//       <input
-//         className={styles.input}
-//         placeholder='Enter GitHub username'
-//         onChange={(e) => debouncedSearch(e.target.value)}
-//       />
+  const {
+    data: repos,
+    isLoading,
+    error,
+  } = useGetUserReposQuery({ username, page }, { skip: !username });
 
-//       {isLoading && <div className={styles.loading}>Loading...</div>}
-//       {renderError()}
-//       {renderNodata()}
-//     </>
-//   );
-// }
+  useEffect(() => {
+    dispatch(setLoading(isLoading));
+    if (repos) {
+      dispatch(setRepos(repos));
+      dispatch(setError(null));
+      console.log('Dispatching repos:', repos);
+    }
+    if (repos?.length === 0 && page === 1) {
+      dispatch(setError(no_avalaible));
+    }
+    if (error) {
+      if ('status' in error) {
+        dispatch(setError(user));
+      } else dispatch(setError(fetching));
+      dispatch(setRepos(null));
+    }
+  }, [repos, isLoading, error, dispatch]);
+
+  const debouncedSearch = useDebouncedCallback((value: string) => {
+    setUsername(value);
+    setPage(1);
+    dispatch(setRepos(null));
+  }, 1000);
+
+  return (
+    <>
+      <input
+        className={styles.input}
+        placeholder={placeholder}
+        onChange={(e) => debouncedSearch(e.target.value)}
+      />
+    </>
+  );
+}

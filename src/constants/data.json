@@ -7,17 +7,18 @@
     "no_data": "No description available"
   },
   "fetch": {
-    "search_placeholder": "Enter GitHub username..."
+    "placeholder": "Enter GitHub username...",
+    "errors": {
+      "user": "User not found",
+      "fetching": "Error fetching repositories",
+      "no_avalaible": "No public repositories avalaible"
+    }
   },
   "home": {
     "title": "GitHub Repository Search",
     "loader": {
       "loading": "Loading...",
       "fetching": "Loading more..."
-    },
-    "errors": {
-      "user": "User not found",
-      "fetching": "Error fetching repositories"
     }
   }
 }
