@@ -1,18 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { IRepository } from '@/types/repo';
 
-interface Repository {
-  id: number;
-  name: string;
-  description: string | null;
-  html_url: string;
-  stargazers_count: number;
-  updated_at: string;
-}
-
-interface SearchResponse {
-  items: Repository[];
-  total_count: number;
-}
+// interface SearchResponse {
+//   items: IRepository[];
+//   total_count: number;
+// }
 
 export const githubApi = createApi({
   reducerPath: 'githubApi',
@@ -20,7 +12,7 @@ export const githubApi = createApi({
     baseUrl: 'https://api.github.com',
   }),
   endpoints: (builder) => ({
-    getUserRepos: builder.query<Repository[], { username: string; page: number }>({
+    getUserRepos: builder.query<IRepository[], { username: string; page: number }>({
       query: ({ username, page = 1 }) => ({
         url: `/users/${username}/repos`,
         params: {

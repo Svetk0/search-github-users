@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { IRepo } from '@/types/repo';
+import { IRepository } from '@/types/repo';
 import staticData from '@/constants/data.json';
 import styles from './RepoCard.module.scss';
 
 type Props = {
-  repo: IRepo;
+  repo: IRepository;
 };
 
 export function RepoCard({ repo }: Props) {

@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
-import { RepoCard } from '../RepoCard/RepoCard';
-import { IRepo } from '@/types/repo';
+import { RepoCard } from '@/components';
+import { IRepository } from '@/types/repo';
 import styles from './RepoSearch.module.scss';
 
 export function RepoSearch() {
   const [username, setUsername] = useState('');
   const [page, setPage] = useState(1);
-  const [allRepos, setAllRepos] = useState<IRepo[]>([]);
+  const [allRepos, setAllRepos] = useState<IRepository[] | null>(null);
   const loader = useRef(null);
 
   const {
@@ -17,19 +17,17 @@ export function RepoSearch() {
     error,
     isFetching,
   } = useGetUserReposQuery({ username, page }, { skip: !username });
-  const res = useGetUserReposQuery({ username, page }, { skip: !username });
 
   useEffect(() => {
     if (repos) {
       setAllRepos((prev) => (page === 1 ? repos : [...prev, ...repos]));
     }
-    console.log('res', res);
   }, [repos]);
 
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setUsername(value);
     setPage(1);
-    setAllRepos([]);
+    setAllRepos(null);
   }, 1000);
 
   useEffect(() => {
@@ -58,6 +56,12 @@ export function RepoSearch() {
     }
     return null;
   };
+  const renderNodata = () => {
+    if (repos?.length === 0 && page === 1) {
+      return <div className={styles.error}>No public repositories avalaible</div>;
+    }
+    return null;
+  };
 
   return (
     <div className={styles.container}>
@@ -69,6 +73,7 @@ export function RepoSearch() {
 
       {isLoading && <div className={styles.loading}>Loading...</div>}
       {renderError()}
+      {renderNodata()}
 
       <div className={styles.repoGrid}>
         {allRepos?.map((repo) => <RepoCard repo={repo} key={repo.id} />)}

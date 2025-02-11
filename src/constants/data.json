@@ -6,8 +6,8 @@
     },
     "no_data": "No description available"
   },
-  "search": {
-    "placeholder": "Enter GitHub username..."
+  "fetch": {
+    "search_placeholder": "Enter GitHub username..."
   },
   "home": {
     "title": "GitHub Repository Search",
