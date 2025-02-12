@@ -1,0 +1,7 @@
+@import '@styles/mixins';
+
+.input {
+    @include Input;
+    width: clamp(250px, 100%, 400px);
+    margin-bottom: 40px;
+}

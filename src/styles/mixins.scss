@@ -1,21 +1,6 @@
 @import './screens.scss';
 @import './vars.scss';
 
-@mixin flexRow {
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-}
-
-@mixin HeaderStyles($fontSize: 94px, $fontWeight: 600, $textAlign: center, $color: $dark-grey) {
-  font-size: $fontSize;
-  font-weight: $fontWeight;
-  line-height: $fontSize;
-  text-align: $textAlign;
-  color: $color;
-  font-family: inherit;
-  margin: 0;
-}
 
 @mixin ResetButton {
   background-color: inherit;
@@ -31,14 +16,6 @@
   text-align: $align;
   line-height: $line-height;
   font-family: inherit;
-}
-
-@mixin Label {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 19.36px;
-  text-align: left;
-  color: $grey;
 }
 
 @mixin Input($align: left) {
@@ -81,70 +58,6 @@
   &::-webkit-clear-button,
   &::-webkit-password-toggle-button {
     display: none;
-  }
-}
-
-@mixin InputDate {
-  //full calendar touch field mask
-  font-family: inherit;
-  position: relative;
-  padding-right: 5px;
-  color: transparent;
-
-  &:invalid {
-    color: transparent;
-  }
-
-  &::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: auto;
-    height: auto;
-    color: transparent;
-    background: transparent;
-  }
-
-  &::-webkit-inner-spin-button,
-  &::-webkit-clear-button {
-    z-index: -10;
-  }
-}
-
-@mixin BlockHeader($textAlign: center, $color: $dark-grey) {
-  @include headerStyles(94px, 600, $textAlign, $color);
-  letter-spacing: -0.02em;
-
-  @media (max-width: $laptop) {
-    @include headerStyles(58px, 600, $textAlign, $color);
-  }
-
-  @media (max-width: $tablet) {
-    @include headerStyles(48px, 600, $textAlign, $color);
-    letter-spacing: -0.03em;
-  }
-
-  @media (max-width: $mobile) {
-    @include headerStyles(36px, 600, left, $color);
-    letter-spacing: -0.02em;
-  }
-}
-
-@mixin blockSubtitle($textAlign: center, $color: $dark-grey) {
-  @include headerStyles(16px, 700, $textAlign, $color);
-  letter-spacing: -0.02em;
-  line-height: 19.2px;
-  text-transform: uppercase;
-
-  @media (max-width: $tablet) {
-    @include headerStyles(12px, 700, $textAlign, $color);
-    line-height: 14.4px;
-  }
-
-  @media (max-width: $mobile) {
-    @include headerStyles(12px, 700, left, $color);
   }
 }
 

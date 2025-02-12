@@ -1,8 +1,8 @@
-export interface IRepo {
+export interface IRepository {
   id: number;
-  description: string;
   name: string;
-  updated_at: string;
+  description: string | null;
   html_url: string;
   stargazers_count: number;
+  updated_at: string;
 }
