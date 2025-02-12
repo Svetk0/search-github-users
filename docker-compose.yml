@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3018:3018'
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/search-github-users
+      - /search-github-users/node_modules
+      - /search-github-users/.next
