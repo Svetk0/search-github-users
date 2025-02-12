@@ -28,7 +28,32 @@
 - Node.js 18.17 или выше
 - npm или yarn
 
-## Установка и запуск
+## Установка и запуск (используя Docker)
+
+1. Убедитесь, что у вас установлен [Docker](https://www.docker.com/products/docker-desktop/)
+
+2. Клонируйте репозиторий:
+
+```bash
+git clone https://github.com/svetk0/search-github-users.git
+cd search-github-users
+```
+
+3. Выполните сборку образа:
+
+```bash
+docker build -t search-github-users .
+```
+
+4. Запустите образ:
+
+```bash
+docker run -p 3018:3018 search-github-users
+```
+
+5. Откройте [http://localhost:3018](http://localhost:3018) в браузере.
+
+## Установка и запуск (без Docker)
 
 1. Клонируйте репозиторий:
 
