@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
 import { useAppDispatch, useAppSelector } from '@/lib/hooks';
-import { setRepos, setLoading, setError } from '@/store/reposSlice';
+import { setRepos, setLoading, setError, setPage } from '@/store/reposSlice';
 import staticData from '@/constants/data.json';
 import styles from './Search.module.scss';
 
@@ -25,39 +25,39 @@ export function Search({ currentPage }: SearchProps) {
     error,
   } = useGetUserReposQuery({ username, page: currentPage }, { skip: !username });
 
-  // Обработка изменений в данных
   useEffect(() => {
-    // Установка состояния загрузки
     dispatch(setLoading(isLoading));
 
-    // Обработка ошибок
     if (error) {
       dispatch(setError('status' in error ? user : fetching));
       dispatch(setRepos(null));
       return;
     }
 
-    // Обработка успешного получения данных
     if (repos) {
-      // Обработка пустого результата
       if (repos.length === 0 && currentPage === 1) {
         dispatch(setError(no_avalaible));
         dispatch(setRepos(null));
         return;
       }
 
-      // Обновление списка репозиториев
-      const updatedRepos =
-        currentPage === 1 ? repos : currentRepos ? [...currentRepos, ...repos] : repos;
-
-      dispatch(setRepos(updatedRepos));
       dispatch(setError(null));
     }
   }, [repos, error, isLoading, currentPage]);
-
+  useEffect(() => {
+    const existingIds = new Set(currentRepos?.map((repo) => repo.id));
+    const updatedRepos =
+      currentPage === 1
+        ? repos
+        : currentRepos
+          ? [...currentRepos, ...(repos?.filter((repo) => !existingIds.has(repo.id)) || [])]
+          : repos || [];
+    dispatch(setRepos(updatedRepos || []));
+  }, [repos, dispatch]);
   const debouncedSearch = useDebouncedCallback((value: string) => {
     setUsername(value);
     dispatch(setRepos(null));
+    dispatch(setPage(1));
   }, 1000);
 
   return (

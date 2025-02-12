@@ -20,4 +20,4 @@ export const githubApi = createApi({
   }),
 });
 
-export const { useGetUserReposQuery, useLazyGetUserReposQuery } = githubApi;
+export const { useGetUserReposQuery } = githubApi;

@@ -21,7 +21,6 @@ const reposSlice = createSlice({
   reducers: {
     setRepos: (state, action: PayloadAction<IRepository[] | null>) => {
       state.repos = action.payload;
-      console.log('Repos updated in store:', action.payload);
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -32,8 +31,11 @@ const reposSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    incrementPage: (state) => {
+      state.page += 1;
+    },
   },
 });
 
-export const { setRepos, setLoading, setError, setPage } = reposSlice.actions;
+export const { setRepos, setLoading, setError, setPage, incrementPage } = reposSlice.actions;
 export default reposSlice.reducer;

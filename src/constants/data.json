@@ -17,8 +17,8 @@
   "home": {
     "title": "GitHub Repository Search",
     "loader": {
-      "loading": "Loading...",
-      "fetching": "Loading more..."
+      "load": "Loading...",
+      "fetch": "Loading more..."
     }
   }
 }
