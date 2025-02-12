@@ -17,21 +17,23 @@ export function RepoCard({ repo }: Props) {
     <div className={styles.repoCard}>
       <h3>{repo.name}</h3>
       <p>{repo.description || no_data}</p>
-      <div className={styles.repoInfo}>
-        <span>⭐ {repo.stargazers_count}</span>
-        <span>
-          {updated} {new Date(repo.updated_at).toLocaleDateString()}
-        </span>
-      </div>
+      <div>
+        <div className={styles.repoInfo}>
+          <span>{`⭐  ${repo.stargazers_count}`}</span>
+          <span>
+            {updated} {new Date(repo.updated_at).toLocaleDateString()}
+          </span>
+        </div>
 
-      <Link
-        href={repo.html_url}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={styles.repoLink}
-      >
-        {view}
-      </Link>
+        <Link
+          href={repo.html_url}
+          target='_blank'
+          rel='noopener noreferrer'
+          className={styles.repoLink}
+        >
+          {view}
+        </Link>
+      </div>
     </div>
   );
 }
