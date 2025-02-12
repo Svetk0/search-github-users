@@ -1,11 +1,16 @@
 @import '@styles';
 
 .repoCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: $black-70;
     border-radius: 8px;
     padding: 20px;
     border: 1px solid $purple;
     transition: all 0.3s ease;
+    overflow: hidden;
+
 
     &:hover {
         transform: translateY(-5px);
@@ -45,7 +50,9 @@
     cursor: pointer;
 
     &:hover {
-        background: $purple-light;
-        color: $white;
+        font-weight: 400;
+        background: $light-green-neon;
+        color: $black-deep;
+        border: none;
     }
 }

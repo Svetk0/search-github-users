@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { incrementPage } from '@/store/reposSlice';
@@ -8,19 +9,14 @@ import styles from './RepoSearch.module.scss';
 
 export function RepoSearch() {
   const {
-    //title,
+    title,
     loader: { load, fetch },
   } = staticData.home;
   const dispatch = useAppDispatch();
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const { repos, loading, error, page } = useAppSelector((state) => state.repos);
   const loader = useRef(null);
-  useEffect(() => {
-    console.log('Repos from store:', repos);
-    console.log('Loading state:', loading);
-    console.log('Error state:', error);
-    console.log('current page:', page);
-  }, [repos, loading, error, page]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -49,6 +45,7 @@ export function RepoSearch() {
 
   return (
     <div className={styles.container}>
+      <h1 className={styles.title}>{title}</h1>
       <Search currentPage={page} />
       <div className={styles.repoGrid}>
         {repos?.map((repo: IRepository) => <RepoCard repo={repo} key={repo.id} />)}

@@ -1,3 +1,4 @@
+'use client';
 import { useState, useEffect } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useGetUserReposQuery } from '@/api/github';
@@ -64,6 +65,7 @@ export function Search({ currentPage }: SearchProps) {
     <input
       className={styles.input}
       placeholder={placeholder}
+      autoComplete='false'
       onChange={(e) => debouncedSearch(e.target.value)}
     />
   );

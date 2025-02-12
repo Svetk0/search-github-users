@@ -10,10 +10,9 @@
     justify-content: center;
 }
 
-.input {
-    @include Input;
-    width: clamp(250px, 100%, 400px);
-    margin-bottom: 40px;
+.title {
+    font-size: 32px;
+    margin-bottom: 20px;
 }
 
 .repoGrid {
@@ -23,8 +22,6 @@
     gap: 20px;
     margin-top: 20px;
 }
-
-
 
 .loading {
     text-align: center;
